@@ -1,0 +1,177 @@
+#define LED1 22
+#define LED2 21
+#define LED3 5
+#define LED4 16
+#define LED5 2
+#define LED6 15
+#define BUTTON1 23
+#define BUTTON2 19
+#define BUTTON3 18
+#define BUTTON4 17
+
+bool ledstate1 = false;
+bool ledstate2 = false;
+bool ledstate3 = false;
+bool ledstate4 = false;
+bool lastbuttonstate1 = LOW;
+bool lastbuttonstate2 = LOW;
+bool lastbuttonstate3 = LOW;
+bool lastbuttonstate4 = LOW;
+
+void setup() {
+  pinMode(BUTTON1, INPUT_PULLDOWN);
+  pinMode(BUTTON2, INPUT_PULLDOWN);
+  pinMode(BUTTON3, INPUT_PULLDOWN);
+  pinMode(BUTTON4, INPUT_PULLDOWN);
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT);
+  pinMode(LED4, OUTPUT);
+  pinMode(LED5, OUTPUT);
+  pinMode(LED6, OUTPUT);
+
+  digitalWrite(LED1, LOW);
+  digitalWrite(LED2, LOW);
+  digitalWrite(LED3, LOW);
+  digitalWrite(LED4, LOW);
+  digitalWrite(LED5, LOW);
+  digitalWrite(LED6, LOW);
+}
+
+void loop() {
+  bool buttonstate1 = digitalRead(BUTTON1);
+  bool buttonstate2 = digitalRead(BUTTON2);
+  bool buttonstate3 = digitalRead(BUTTON3);
+  bool buttonstate4 = digitalRead(BUTTON4);
+
+// M
+  if(buttonstate1 == HIGH && lastbuttonstate1 == LOW) {
+    ledstate1 = !ledstate1;
+    digitalWrite(LED1, ledstate1);
+
+    delay(50);
+  }
+
+  lastbuttonstate1 = buttonstate1;
+
+// A
+  if(buttonstate2 == HIGH && lastbuttonstate2 == LOW) {
+    ledstate2 = !ledstate2;
+    digitalWrite(LED2, ledstate2);
+
+    delay(50);
+  }
+
+  lastbuttonstate2 = buttonstate2;
+
+// B
+  if(buttonstate3 == HIGH && lastbuttonstate3 == LOW) {
+    ledstate3 = !ledstate3;
+    digitalWrite(LED3, ledstate3);
+
+    delay(50);
+  }
+
+  lastbuttonstate3 = buttonstate3;
+
+// Cin
+   if(buttonstate4 == HIGH && lastbuttonstate4 == LOW) {
+    ledstate4 = !ledstate4;
+    digitalWrite(LED4, ledstate4);
+
+    delay(50);
+  }
+
+  lastbuttonstate4 = buttonstate4;
+
+
+// M = 0  ADDER
+if (ledstate1 == LOW) {
+
+  if (ledstate2 == LOW && ledstate3 == LOW && ledstate4 == LOW) {
+    digitalWrite(LED5, LOW);
+    digitalWrite(LED6, LOW);
+  }
+
+  else if (ledstate2 == LOW && ledstate3 == LOW && ledstate4 == HIGH) {
+    digitalWrite(LED5, HIGH);
+    digitalWrite(LED6, LOW);
+  }
+
+  else if (ledstate2 == LOW && ledstate3 == HIGH && ledstate4 == LOW) {
+    digitalWrite(LED5, HIGH);
+    digitalWrite(LED6, LOW);
+  }
+
+  else if (ledstate2 == LOW && ledstate3 == HIGH && ledstate4 == HIGH) {
+    digitalWrite(LED5, LOW);
+    digitalWrite(LED6, HIGH);
+  }
+
+  else if (ledstate2 == HIGH && ledstate3 == LOW && ledstate4 == LOW) {
+    digitalWrite(LED5, HIGH);
+    digitalWrite(LED6, LOW);
+  }
+
+  else if (ledstate2 == HIGH && ledstate3 == LOW && ledstate4 == HIGH) {
+    digitalWrite(LED5, LOW);
+    digitalWrite(LED6, HIGH);
+  }
+
+  else if (ledstate2 == HIGH && ledstate3 == HIGH && ledstate4 == LOW) {
+    digitalWrite(LED5, LOW);
+    digitalWrite(LED6, HIGH);
+  }
+
+  else if (ledstate2 == HIGH && ledstate3 == HIGH && ledstate4 == HIGH) {
+    digitalWrite(LED5, HIGH);
+    digitalWrite(LED6, HIGH);
+  }
+}
+
+
+// M = 1  SUBTRACTOR
+if (ledstate1 == HIGH) {
+
+  if (ledstate2 == LOW && ledstate3 == LOW && ledstate4 == LOW) {
+    digitalWrite(LED5, LOW);
+    digitalWrite(LED6, LOW);
+  }
+
+  else if (ledstate2 == LOW && ledstate3 == LOW && ledstate4 == HIGH) {
+    digitalWrite(LED5, HIGH);
+    digitalWrite(LED6, HIGH);
+  }
+
+  else if (ledstate2 == LOW && ledstate3 == HIGH && ledstate4 == LOW) {
+    digitalWrite(LED5, HIGH);
+    digitalWrite(LED6, HIGH);
+  }
+
+  else if (ledstate2 == LOW && ledstate3 == HIGH && ledstate4 == HIGH) {
+    digitalWrite(LED5, LOW);
+    digitalWrite(LED6, HIGH);
+  }
+
+  else if (ledstate2 == HIGH && ledstate3 == LOW && ledstate4 == LOW) {
+    digitalWrite(LED5, HIGH);
+    digitalWrite(LED6, LOW);
+  }
+
+  else if (ledstate2 == HIGH && ledstate3 == LOW && ledstate4 == HIGH) {
+    digitalWrite(LED5, LOW);
+    digitalWrite(LED6, LOW);
+  }
+
+  else if (ledstate2 == HIGH && ledstate3 == HIGH && ledstate4 == LOW) {
+    digitalWrite(LED5, LOW);
+    digitalWrite(LED6, LOW);
+  }
+
+  else if (ledstate2 == HIGH && ledstate3 == HIGH && ledstate4 == HIGH) {
+    digitalWrite(LED5, HIGH);
+    digitalWrite(LED6, HIGH);
+  }
+}
+
+}
